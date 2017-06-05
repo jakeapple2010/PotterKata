@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 
 namespace PotterKataNet
@@ -116,6 +117,17 @@ namespace PotterKataNet
             var result = _classUnderTest.CalculateCost();
 
             Assert.That(result, Is.EqualTo(51.2m));
+        }
+
+        [Test]
+        public void Cost_calculation_does_NOT_effect_cart_contents()
+        {
+            var books = new List<string> { "book1", "book1", "book2", "book2", "book3", "book3", "book4", "book5" };
+
+            _classUnderTest.AddBooksToCard(books.ToArray());
+            _classUnderTest.CalculateCost();
+
+            Assert.That(_classUnderTest.BooksInCart, Is.EqualTo(books));
         }
     }
 }

@@ -5,10 +5,10 @@ namespace PotterKataNet
 {
     public class Cart
     {
-        public List<string> BooksInCart { get; private set; }
+        public ICollection<string> BooksInCart { get; private set; }
         private readonly decimal _bookCost = 8m;
 
-        public void AddBooksToCard(List<string> booksToAddToCart)
+        public void AddBooksToCard(ICollection<string> booksToAddToCart)
         {
             BooksInCart = booksToAddToCart;
         }
@@ -26,22 +26,23 @@ namespace PotterKataNet
         public decimal CalculateCost()
         {
             var totalCost = 0m;
+            var workingList = BooksInCart.ToList();
 
-            while (BooksInCart.Any())
+            while (workingList.Any())
             {
-                if (BooksInCart.HasTwoSetsOfFour())
+                if (workingList.HasTwoSetsOfFour())
                 {
-                    BooksInCart.RemoveTwoSetsOfFour();
+                    workingList.RemoveTwoSetsOfFour();
                     totalCost += CalculateBookSetCost(4);
                     totalCost += CalculateBookSetCost(4);
                     continue;
                 }
 
-                var bookSet = BooksInCart.Distinct().ToList();
+                var bookSet = workingList.Distinct().ToList();
 
                 totalCost += CalculateBookSetCost(bookSet.Count);
 
-                BooksInCart.RemoveBookSet(bookSet);
+                workingList.RemoveBookSet(bookSet);
             }
             return totalCost;
         }
