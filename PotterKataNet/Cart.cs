@@ -5,14 +5,15 @@ namespace PotterKataNet
 {
     public class Cart
     {
-        public List<string> Books { get; private set; }
+        public List<string> BooksInCart { get; private set; }
+        private readonly decimal _bookCost = 8m;
 
         public void AddBooksToCard(List<string> booksToAddToCart)
         {
-            Books = booksToAddToCart;
+            BooksInCart = booksToAddToCart;
         }
 
-        readonly Dictionary<int, decimal> _discounts = new Dictionary<int, decimal>
+        private readonly Dictionary<int, decimal> _discounts = new Dictionary<int, decimal>
         {
             { 0, 0m },
             { 1, 0m },
@@ -26,54 +27,28 @@ namespace PotterKataNet
         {
             var totalCost = 0m;
 
-            while (Books.Any())
+            while (BooksInCart.Any())
             {
-                var bookSet = Books.Distinct().ToList();
-
-                if (HasTwoSetsOfFour())
+                if (BooksInCart.HasTwoSetsOfFour())
                 {
-                    RemoveSetOfFour();
-                    RemoveSetOfFour();
-                    totalCost += 51.2m;
+                    BooksInCart.RemoveTwoSetsOfFour();
+                    totalCost += CalculateBookSetCost(4);
+                    totalCost += CalculateBookSetCost(4);
                     continue;
                 }
 
-                RemoveBookSet(bookSet);
-                
-                if (_discounts.ContainsKey(bookSet.Count()))
-                {
-                    totalCost += bookSet.Count() * 8 * (1-_discounts[bookSet.Count()]);
-                }
+                var bookSet = BooksInCart.Distinct().ToList();
+
+                totalCost += CalculateBookSetCost(bookSet.Count);
+
+                BooksInCart.RemoveBookSet(bookSet);
             }
             return totalCost;
         }
 
-        private bool HasTwoSetsOfFour()
+        private decimal CalculateBookSetCost(int numberOfBooks)
         {
-            var workingBookList = Books.ToList();
-            var enumerable = workingBookList.Distinct().Take(4).ToList();
-            foreach (var item in enumerable)
-            {
-                workingBookList.Remove(item);
-            }
-            return workingBookList.Distinct().Count() >= 4;
-        }
-
-        private void RemoveSetOfFour()
-        {
-            var enumerable = Books.Distinct().Take(4).ToList();
-            foreach (var item in enumerable)
-            {
-                Books.Remove(item);
-            }
-        }
-
-        private void RemoveBookSet(IEnumerable<string> bookSet)
-        {
-            foreach (var s in bookSet)
-            {
-                Books.Remove(s);
-            }
+            return numberOfBooks * _bookCost * (1 - _discounts[numberOfBooks]);
         }
     }
 }

@@ -1,0 +1,7 @@
+C:\Users\Jake Apple\documents\visual studio 2017\Projects\PotterKata\PotterKataNet\bin\Debug\PotterKataNet.dll
+C:\Users\Jake Apple\documents\visual studio 2017\Projects\PotterKata\PotterKataNet\bin\Debug\PotterKataNet.pdb
+C:\Users\Jake Apple\documents\visual studio 2017\Projects\PotterKata\PotterKataNet\bin\Debug\nunit.framework.dll
+C:\Users\Jake Apple\documents\visual studio 2017\Projects\PotterKata\PotterKataNet\bin\Debug\nunit.framework.xml
+C:\Users\Jake Apple\documents\visual studio 2017\Projects\PotterKata\PotterKataNet\obj\Debug\PotterKata.csprojResolveAssemblyReference.cache
+C:\Users\Jake Apple\documents\visual studio 2017\Projects\PotterKata\PotterKataNet\obj\Debug\PotterKataNet.dll
+C:\Users\Jake Apple\documents\visual studio 2017\Projects\PotterKata\PotterKataNet\obj\Debug\PotterKataNet.pdb

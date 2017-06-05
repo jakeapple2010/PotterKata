@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BookCartExtensions.cs" />
     <Compile Include="Cart.cs" />
     <Compile Include="CartSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
