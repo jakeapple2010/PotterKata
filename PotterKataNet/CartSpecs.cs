@@ -129,5 +129,28 @@ namespace PotterKataNet
 
             Assert.That(_classUnderTest.BooksInCart, Is.EqualTo(books));
         }
+
+        [Test]
+        public void Two_sets_of_five()
+        {
+            var books = new List<string>
+            {
+                "book1",
+                "book1",
+                "book2",
+                "book2",
+                "book3",
+                "book3",
+                "book4",
+                "book4",
+                "book5",
+                "book5"
+            };
+
+            _classUnderTest.AddBooksToCard(books.ToArray());
+            var result = _classUnderTest.CalculateCost();
+
+            Assert.That(result, Is.EqualTo(32*0.8 + 32*0.8 + 16*0.95));
+        }
     }
 }
